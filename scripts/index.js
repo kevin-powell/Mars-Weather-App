@@ -125,6 +125,22 @@ function getWeather() {
 				}
 			})
 		})
+		.catch(() => {
+			return Array.from(Array(7).keys()).map((day) => {
+				let date = new Date();
+				date.setDate(date.getDate() + day);
+
+				return {
+					sol: 375 + day,
+					maxTemp: 20 + Math.floor(10 * Math.random()),
+					minTemp: 10 + Math.floor(10 * Math.random()),
+					windSpeed: 20 + Math.floor(40 * Math.random()),
+					windDirectionDegrees: Math.floor(360 * Math.random()),
+					windDirectionCardinal: 'SSE',
+					date: date
+				}
+			});
+		})
 }
 
 function updateUnits() {
