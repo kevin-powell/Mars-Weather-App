@@ -38,6 +38,8 @@ body {
   background-size: cover;
   color: var(--clr-light);
   min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
 }
 
 h1,
@@ -51,6 +53,14 @@ a {
 }
 a:hover {
   color: var(--clr-accent-dark);
+}
+
+.scroll-container {
+  min-height: inherit;
+  max-height: inherit;
+  overflow: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .main-title {
@@ -190,7 +200,6 @@ a:hover {
 }
 
 .previous-weather {
-  display: none;
   background: var(--clr-light);
   color: var(--clr-dark);
   position: absolute;
@@ -198,19 +207,36 @@ a:hover {
   width: 100%;
   transform: translateY(60%);
   transition: transform 350ms ease;
+  z-index: 2;
+}
+.previous-weather__content {
   padding: 3rem;
+}
+@media (max-width: 900px) {
+  .previous-weather {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 220px;
+    max-width: 50vw;
+    transform: translateX(100%);
+  }
+  .previous-weather__content {
+    padding: 1.5rem;
+    overflow: auto;
+    height: 100%;
+  }
+  .previous-weather .previous-days {
+    flex-direction: column;
+  }
 }
 
 .show-previous-weather {
   position: absolute;
   background: var(--clr-light);
-  left: 50%;
-  width: 10rem;
-  transform: translate(-50%, calc(-100% - 3rem));
   text-align: center;
   font-size: var(--fs-h2);
   line-height: 1;
-  clip-path: polygon(50% 0, 0 100%, 100% 100%);
   cursor: pointer;
   color: var(--clr-gray);
   border: 0;
@@ -224,6 +250,25 @@ a:hover {
   transform: rotate(0);
   transition: transform 300ms ease;
 }
+@media (max-width: 900px) {
+  .show-previous-weather {
+    top: 50%;
+    height: 10rem;
+    transform: translate(calc(-100%), -50%);
+    clip-path: polygon(0 50%, 100% 0, 100% 100%);
+  }
+  .show-previous-weather span {
+    transform: rotate(270deg);
+  }
+}
+@media (min-width: 900px) {
+  .show-previous-weather {
+    left: 50%;
+    width: 10rem;
+    transform: translate(-50%, calc(-100%));
+    clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  }
+}
 
 .previous-days {
   display: flex;
@@ -236,6 +281,7 @@ a:hover {
 
 .previous-day {
   opacity: 0;
+  position: relative;
 }
 .previous-day > * {
   margin: 0;
@@ -256,6 +302,24 @@ a:hover {
 }
 .previous-day__more-info:hover {
   background: var(--clr-gray);
+}
+@media (max-width: 900px) {
+  .previous-day {
+    --margin: 1em;
+  }
+  .previous-day::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin-top: var(--margin);
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.15);
+    width: 100%;
+  }
+  .previous-day + .previous-day {
+    margin-top: calc(2 * var(--margin) + 1px);
+  }
 }
 
 .show-weather.previous-weather {
@@ -293,6 +357,18 @@ a:hover {
 .show-weather.previous-weather .previous-day:nth-child(7) {
   animation-delay: 300ms;
 }
+@media (max-width: 900px) {
+  .show-weather.previous-weather {
+    transform: translateX(0);
+  }
+  .show-weather.previous-weather .previous-day,
+.show-weather.previous-weather .previous-weather__title {
+    animation: slideLeftIn 750ms forwards;
+  }
+  .show-weather.previous-weather .show-previous-weather span {
+    transform: rotate(90deg);
+  }
+}
 
 @keyframes slideUpIn {
   0% {
@@ -302,6 +378,16 @@ a:hover {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@keyframes slideLeftIn {
+  0% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 @media (min-width: 600px) {
