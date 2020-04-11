@@ -1,8 +1,8 @@
 // Where we make things look pretty
 
 *,
-*::before,
-*::after {
+*::after,
+*::before {
     box-sizing: border-box;
 }
 
@@ -20,9 +20,9 @@
     --clr-dark: #444;
     --clr-accent: #D06D6D;
     --clr-accent-dark: #613131;
-  }
+}
 
-  .sr-only:not(:focus):not(:active) {
+.sr-only:not(:focus):not(:active) {
     clip: rect(0 0 0 0);
     clip-path: inset(50%);
     height: 1px;
@@ -30,21 +30,25 @@
     position: absolute;
     white-space: nowrap;
     width: 1px;
-  }
+}
 
-  body {
+body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
-    background-image: url(../img/mars.jpg);
+    background-image: url("../img/mars.jpg");
     background-size: cover;
     color: var(--clr-light);
     min-height: 100vh;
-} 
+}
 
-h1, h2, h3 { line-height: 1; }
+h1,
+h2,
+h3 {
+    line-height: 1;
+}
 
-a { 
+a {
     color: var(--clr-accent);
 
     &:hover {
@@ -77,7 +81,6 @@ a {
     color: var(--clr-gray);
 }
 
-
 .mars-current-weather {
     background: rgba(0,0,0,.7);
     padding: 6em 2em 2em;
@@ -97,7 +100,7 @@ a {
 }
 
 .temp {
-    --border: solid .25em var(--clr-accent-dark);
+    --border: solid 0.25em var(--clr-accent-dark);
     padding: 2em 0;
 }
 
@@ -108,8 +111,8 @@ a {
     grid-template-rows: min-content 1fr;
     align-self: start;
 
-    .section-title,
-    .reading {
+    .reading,
+    .section-title {
         grid-column: 1 / 2;
     }
 
@@ -129,7 +132,7 @@ a {
         /* update Custom Props in JS
         to update the direction */
         --direction: 180deg;
-        --size: .75rem;
+        --size: 0.75rem;
         height: calc(var(--size) * 3);
         width: var(--size);
         background: var(--clr-accent-dark);
@@ -141,7 +144,6 @@ a {
     }
 }
 
-
 .unit {
     @media (max-width: 900px) {
         position: absolute;
@@ -152,14 +154,14 @@ a {
     place-self: end;
     color: var(--clr-light);
     display: flex;
-    opacity: .7;
+    opacity: 0.7;
     transition: opacity 275ms linear;
 
     &:hover {
         opacity: 1;
     }
 
-   label {
+    label {
         cursor: pointer;
     }
 
@@ -188,8 +190,7 @@ a {
             background: var(--clr-light);
             border-radius: 50%;
             height: 1rem;
-            margin: 3px;
-            margin-left: auto;
+            margin: 3px 3px 3px auto;
             width: 1rem;
         }
     }
@@ -213,7 +214,6 @@ a {
 
 .show-previous-weather {
 
-
     position: absolute;
     background: var(--clr-light);
     left: 50%;
@@ -228,8 +228,8 @@ a {
     border: 0;
     font-family: inherit;
 
-    &:hover,
-    &:focus {
+    &:focus,
+    &:hover {
         color: var(--clr-dark);
     }
 
@@ -252,10 +252,12 @@ a {
 .previous-day {
     opacity: 0;
 
-    & > * {margin: 0;}
+    & > * {
+        margin: 0;
+    }
 
     &__date {
-        font-size: .9rem;
+        font-size: 0.9rem;
         color: var(--clr-gray);
     }
 
@@ -266,7 +268,7 @@ a {
         background: var(--clr-dark);
         color: var(--clr-light);
         text-transform: uppercase;
-        padding: .3em 1em;
+        padding: 0.3em 1em;
         margin-top: 1em;
 
         &:hover {
@@ -274,10 +276,7 @@ a {
         }
     }
 
-
 }
-
-
 
 .show-weather.previous-weather {
     transform: translateY(0);
@@ -287,8 +286,8 @@ a {
         transform: rotate(180deg) translateY(-6px);
     }
 
-    .previous-weather__title,
-    .previous-day {
+    .previous-day,
+    .previous-weather__title {
         animation: slideUpIn 750ms forwards;
     }
 
@@ -296,17 +295,37 @@ a {
         text-align: left;
     }
 
-    .previous-day:nth-child(1) { animation-delay: 100ms}
-    .previous-day:nth-child(2) { animation-delay: 125ms}
-    .previous-day:nth-child(3) { animation-delay: 150ms}
-    .previous-day:nth-child(4) { animation-delay: 175ms}
-    .previous-day:nth-child(5) { animation-delay: 200ms}
-    .previous-day:nth-child(6) { animation-delay: 225ms}
-    .previous-day:nth-child(7) { animation-delay: 300ms}
+    .previous-day:nth-child(1) {
+        animation-delay: 100ms;
+    }
+
+    .previous-day:nth-child(2) {
+        animation-delay: 125ms;
+    }
+
+    .previous-day:nth-child(3) {
+        animation-delay: 150ms;
+    }
+
+    .previous-day:nth-child(4) {
+        animation-delay: 175ms;
+    }
+
+    .previous-day:nth-child(5) {
+        animation-delay: 200ms;
+    }
+
+    .previous-day:nth-child(6) {
+        animation-delay: 225ms;
+    }
+
+    .previous-day:nth-child(7) {
+        animation-delay: 300ms;
+    }
 }
 
 @keyframes slideUpIn {
-    0% { 
+    0% {
         opacity: 0;
         transform: translateY(50%);
     }
@@ -357,7 +376,7 @@ a {
 
     .mars-current-weather {
         padding: 2em;
-        margin: 4em 4em 0 4em;
+        margin: 4em 4em 0;
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 2em;
     }
@@ -371,8 +390,9 @@ a {
 
     .wind {
         grid-column: 3 / 4;
-        .section-title,
-        .reading {
+
+        .reading,
+        .section-title {
             grid-column: 2 / 3;
         }
 

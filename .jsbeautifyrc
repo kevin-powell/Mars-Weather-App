@@ -1,0 +1,8 @@
+{
+  "scss": {
+    "indent_char": " ",
+    "indent_size": 4,
+    "preserve_newlines": true,
+    "convert_quotes": false
+  }
+}
